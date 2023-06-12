@@ -1,7 +1,7 @@
-# Nerd notes!!! C programming
+# C programming notes and stuff
 
 Datatypes:<br>
-    
+
 - Simple: int, char, float, double.<br>
 - Derived: arrays, pointers.<br>
 - User-defined: enum, structures, unions.<br>
