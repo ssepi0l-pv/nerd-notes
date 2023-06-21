@@ -35,4 +35,4 @@ A XMAS scan turns every TCP flag into FIN, URG and PSH. Similar to FIN and NULL 
 this scan is unreliable when used in this operating system. We can know if a port is open if it replies with FIN, URG and/or PSH. If it
 replies with a RST packet the port is closed. If we get a ICMP error code 3, the port is filtering.
 
-![Nmap XMAS scan seen in Wireshark. Destination IP is scanme.nmap.org.](/nerd-notes/InfoSec/NmapNotes/xmas_scan.png "XMAS scan.")
+![Nmap XMAS scan seen in Wireshark. Destination IP is scanme.nmap.org.](https://github.com/ssepi0l-pv/nerd-notes/blob/master/InfoSec/NmapNotes/xmas_scan.png "XMAS scan.")
