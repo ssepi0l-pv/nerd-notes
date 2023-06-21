@@ -2,14 +2,16 @@
 
 Official docs: https://nmap.org/book/man-port-scanning-techniques.html
 
-| Options | Name             | Description                                                                                                                                                     |
-|---------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -sS     | TCP SYN Scan     | Fast and stealthy scan. Only sends one TCP SYN package and does not answer back.                                                                                |
-| -sT     | TCP Connect Scan | Slow, although stealthier than SYN scans, since it establishes a three-way-handshake. Less likely to be detected by an IDS or IPS.                              |
-| -sU     | UDP Scan         | Slower scan, although it could give good results, since people more often than not forget that UDP ports can be scanned, they forget about them. Great mistake! |
-| -sN     | NULL Scan        | Sets every TCP flag to NULL. Many Windows systems don't know what to do with these packages, which means that scanning them with this flag is unreliable.       |
-| -sF     | FIN Scan         | Sets every TCP flag to FIN. Again, many Windows systems don't know what to di with these packages so the scan becomes unreliable on this systems.               |
-| -sX     | XMAS Scan        | Sets all flags to FIN, URG and PSH. The scan has this name because the TCP package looks like a christmas tree.                                                 |
+| Options | Name                | Description                                                                                                                                                     |
+|---------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -sS     | TCP SYN Scan        | Fast and stealthy scan. Only sends one TCP SYN package and does not answer back.                                                                                |
+| -sT     | TCP Connect Scan    | Slow, although stealthier than SYN scans, since it establishes a three-way-handshake. Less likely to be detected by an IDS or IPS.                              |
+| -sU     | UDP Scan            | Slower scan, although it could give good results, since people more often than not forget that UDP ports can be scanned, they forget about them. Great mistake! |
+| -sN     | NULL Scan           | Sets every TCP flag to NULL. Many Windows systems don't know what to do with these packages, which means that scanning them with this flag is unreliable.       |
+| -sF     | FIN Scan            | Sets every TCP flag to FIN. Again, many Windows systems don't know what to di with these packages so the scan becomes unreliable on this systems.               |
+| -sX     | XMAS Scan           | Sets all flags to FIN, URG and PSH. The scan has this name because the TCP package looks like a christmas tree.                                                 |
+| -sA     | ACK Scan            | The ACK scan only determines if a system can or cannot receive an ACK package. It does not tell whether or not a port is open or closed.                        |
+| -sI     | IDLE or ZOMBIE Scan | This scan uses a pivot system or a zombie to scan a target. Mainly used to be as stealthy as possible, even more than using the -o flag, which we'll see later. |
 
 In a SYN or stealtg scan, a port will be considered to be open if Nmap receives a SYN-ACK answer. If it receives a RST call, 
 the port may be closed. If no answer is received, the port will be considered to be filtering.
@@ -36,3 +38,20 @@ this scan is unreliable when used in this operating system. We can know if a por
 replies with a RST packet the port is closed. If we get a ICMP error code 3, the port is filtering.
 
 ![Nmap XMAS scan seen in Wireshark. Destination IP is scanme.nmap.org.](https://github.com/ssepi0l-pv/nerd-notes/blob/master/InfoSec/NmapNotes/xmas_scan.png "XMAS scan.")
+
+The ACK scan is useful to determine if a system or an amount of systems have a stateful firewall or not. This scan can also be used to determine
+ruleset implemented by the firewall. It only tells if a port is filtering or not and it only expects an TCP RST packet (unfiltered) or an ICMP 
+error code type 3 for filtering aka a stateful firewall exists.
+
+Nmap tells a zombie system to scan a target. The process is the following:
+
+![Nmap Book](https://nmap.org/book/images/idle-scan-open.png "Open port")
+![Nmap Book](https://nmap.org/book/images/idle-scan-closed.png "Closed port")
+![Nmap Book](https://nmap.org/book/images/idle-scan-filtered.png "Filtered port")
+
+The problem with this is that we cannot use a system that has random IP IDs. Most of them nowadays cannot be used as zombie systems because of this
+exact reason. The IP ID has to be sequential, otherwise it will not work. Most systems use all zeros as IP ID or randomized IP IDs.
+
+![IP ID issue](https://github.com/ssepi0l-pv/nerd-notes/blob/master/InfoSec/NmapNotes/idle_scan_nping.png "Nping shows IP IDs.")
+
+As we can see from this Nping image, my PC IP ID is always zero.
