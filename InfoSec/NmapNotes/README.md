@@ -3,9 +3,7 @@
 Official docs: https://nmap.org/book/man-port-scanning-techniques.html
 
 | Options | Name                | Description                                                                                                                                                     |
-|---------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -sS     | TCP SYN Scan        | Fast and stealthy scan. Only sends one TCP SYN package and does not answer back.                                                                                |
-| -sT     | TCP Connect Scan    | Slow, although stealthier than SYN scans, since it establishes a three-way-handshake. Less likely to be detected by an IDS or IPS.                              |
+|---------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------| | -sS     | TCP SYN Scan        | Fast and stealthy scan. Only sends one TCP SYN package and does not answer back.                                                                                | | -sT     | TCP Connect Scan    | Slow, although stealthier than SYN scans, since it establishes a three-way-handshake. Less likely to be detected by an IDS or IPS.                              |
 | -sU     | UDP Scan            | Slower scan, although it could give good results, since people more often than not forget that UDP ports can be scanned, they forget about them. Great mistake! |
 | -sN     | NULL Scan           | Sets every TCP flag to NULL. Many Windows systems don't know what to do with these packages, which means that scanning them with this flag is unreliable.       |
 | -sF     | FIN Scan            | Sets every TCP flag to FIN. Again, many Windows systems don't know what to di with these packages so the scan becomes unreliable on this systems.               |
